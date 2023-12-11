@@ -28,14 +28,14 @@ const CryptoTable = () => {
   }, []);
 
   return (
-    <div>
+    <div className="crypto-table-container">
       <h2>Crypto Prices</h2>
       <table>
         <thead>
           <tr>
             <th>Name</th>
             <th>Rate</th>
-            {/* Add additional headers for other data fields */}
+            {/* Add additional headers for other data points here */}
           </tr>
         </thead>
         <tbody>
@@ -43,7 +43,7 @@ const CryptoTable = () => {
             <tr key={token.name}>
               <td>{token.name}</td>
               <td>{token.rate}</td>
-              {/* Add additional data fields here */}
+              {/* Add additional data points here */}
             </tr>
           ))}
         </tbody>
