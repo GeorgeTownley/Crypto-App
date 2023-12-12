@@ -29,7 +29,6 @@ const CryptoTable = () => {
 
   return (
     <div className="crypto-table-container">
-      <h2>Crypto Prices</h2>
       <table>
         <thead>
           <tr>
