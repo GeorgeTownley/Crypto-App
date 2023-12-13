@@ -1,9 +1,22 @@
 /* App.css */
 
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents scrolling */
+  height: 100vh; /* Locks the height to the viewport */
+}
+
 .App {
   text-align: center;
   background-color: #121212; /* Dark background for the entire app */
   color: white; /* White text color */
+  height: 100vh; /* Full height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center content vertically */
 }
 
 .navbar {
@@ -12,9 +25,12 @@
   justify-content: space-between;
   padding: 0 2rem;
   height: 60px;
+  width: 100%;
+  position: absolute;
+  top: 0;
   background: #121212; /* Dark background for navbar */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+  z-index: 3;
 }
 
 .navbar-logo {
@@ -24,7 +40,7 @@
 }
 
 .crypto-table-container {
-  margin-top: 50px;
+  margin-top: 80px; /* Adjusted to account for navbar */
   width: 80%;
   margin-left: auto;
   margin-right: auto;
@@ -37,18 +53,22 @@ table {
   background: #121212; /* Dark background for the table */
   border-radius: 8px;
   overflow: hidden;
-  animation: glowAnimation 2.5s ease-in-out infinite alternate;
-  box-shadow: 0 0 10px #29fd53; /* Initial glow effect */
+  position: relative;
+  z-index: 2; /* Ensures the table is above the glow */
+  box-shadow: 0 0 15px #29fd53, /* Green glow */ 0 0 30px #fd5129,
+    /* Red glow */ 0 0 45px #2953fd, /* Blue glow */ 0 0 60px #fd29d6; /* Pink glow */
+  animation: glowingBorder 5s ease-in-out infinite alternate;
 }
 
-@keyframes glowAnimation {
-  0% {
-    box-shadow: 0 0 10px #29fd53, 0 0 20px #29fd53, 0 0 30px #29fd53,
-      0 0 40px #29fd53;
-  }
+@keyframes glowingBorder {
+  0%,
   100% {
-    box-shadow: 0 0 20px #fd5129, 0 0 30px #fd5129, 0 0 40px #fd5129,
-      0 0 50px #fd5129;
+    box-shadow: 0 0 10px #29fd53, /* Green glow */ 0 0 20px #fd5129,
+      /* Red glow */ 0 0 30px #2953fd, /* Blue glow */ 0 0 40px #fd29d6; /* Pink glow */
+  }
+  50% {
+    box-shadow: 0 0 20px #29fd53, /* Green glow */ 0 0 40px #fd5129,
+      /* Red glow */ 0 0 60px #2953fd, /* Blue glow */ 0 0 80px #fd29d6; /* Pink glow */
   }
 }
 
@@ -67,5 +87,3 @@ tr:nth-child(even) {
 thead {
   background-color: #121212; /* Dark background for headers */
 }
-
-/* Remove unused styles or update as needed for your current application layout */

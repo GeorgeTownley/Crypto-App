@@ -5,12 +5,12 @@ import CryptoTable from "./components/CryptoTable";
 function App() {
   return (
     <div className="App">
-      <header>
-        <p>
-          <Navbar />
-          <CryptoTable />
-        </p>
-      </header>
+      <div className="crypto-glow"></div>{" "}
+      {/* This will create the glowing effect */}
+      <Navbar />
+      <div className="crypto-table-container">
+        <CryptoTable />
+      </div>
     </div>
   );
 }
