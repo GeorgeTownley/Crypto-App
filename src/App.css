@@ -87,3 +87,65 @@ tr:nth-child(even) {
 thead {
   background-color: #121212; /* Dark background for headers */
 }
+
+/* Modal.css */
+
+.info-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  border-radius: 50%;
+  background-color: #9c27b0; /* Bright purple background */
+  border: none;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  color: #121212; /* Same as the background color */
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+  z-index: 1000;
+}
+
+.info-text {
+  position: relative;
+  top: -2px; /* Adjust if needed */
+}
+
+.info-button.expanded {
+  transform: scale(200); /* Large enough value to cover the whole screen */
+  border-radius: 0;
+  bottom: 50%;
+  left: 50%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none; /* Initially disable interactions */
+  z-index: 999; /* Below the button to allow for click-through */
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto; /* Re-enable interactions */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  color: black;
+  position: relative; /* To stack on top of the overlay */
+  z-index: 1001;
+}
