@@ -21,15 +21,13 @@ const Modal = () => {
       >
         <span className="info-text">i</span>
       </button>
-      {isOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            {/* Content of your modal goes here */}
-            <p>Modal is open!</p>
-            <button onClick={closeModal}>Close</button>
-          </div>
+      <div className={`modal-overlay ${isOpen ? "active" : ""}`}>
+        <div className="modal-content">
+          {/* Content of your modal goes here */}
+          <p>Modal is open!</p>
+          <button onClick={closeModal}>Close</button>
         </div>
-      )}
+      </div>
     </>
   );
 };
