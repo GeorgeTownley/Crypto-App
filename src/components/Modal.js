@@ -1,33 +1,28 @@
-// Modal.js
-
 import React, { useState } from "react";
 
 const Modal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
     <>
       <button
         className={`info-button ${isOpen ? "expanded" : ""}`}
-        onClick={openModal}
+        onClick={toggleModal}
       >
-        <span className="info-text">i</span>
+        {isOpen ? "" : "i"} {/* Render 'i' only when not expanded */}
       </button>
-      <div className={`modal-overlay ${isOpen ? "active" : ""}`}>
-        <div className="modal-content">
-          {/* Content of your modal goes here */}
-          <p>Modal is open!</p>
-          <button onClick={closeModal}>Close</button>
+      {isOpen && (
+        <div className="modal-overlay" onClick={toggleModal}>
+          <div className="modal-content">
+            <p>Modal is open!</p>
+            <button onClick={toggleModal}>Close</button>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
