@@ -30,7 +30,7 @@ html {
   top: 0;
   background: #121212; /* Dark background for navbar */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 1002; /* Ensure navbar is above the modal */
+  z-index: 3;
 }
 
 .navbar-logo {
@@ -55,17 +55,17 @@ table {
   overflow: hidden;
   position: relative;
   z-index: 2; /* Ensures the table is above the glow */
-  box-shadow: 0 0 15px #fd5129, /* Red glow */ 0 0 30px #fd29d6; /* Pink glow */
+  box-shadow: 0 0 30px #fd5129, /* Red glow */ 0 0 60px #fd29d6; /* Pink glow */
   animation: glowingBorder 5s ease-in-out infinite alternate;
 }
 
 @keyframes glowingBorder {
   0%,
   100% {
-    box-shadow: 0 0 10px #fd5129, /* Red glow */ 0 0 20px #fd29d6; /* Pink glow */
+    box-shadow: 0 0 20px #fd5129, /* Red glow */ 0 0 40px #fd29d6; /* Pink glow */
   }
   50% {
-    box-shadow: 0 0 20px #fd5129, /* Red glow */ 0 0 40px #fd29d6; /* Pink glow */
+    box-shadow: 0 0 40px #fd5129, /* Red glow */ 0 0 80px #fd29d6; /* Pink glow */
   }
 }
 
@@ -99,5 +99,59 @@ thead {
   justify-content: center;
   border: none;
   font-size: 24px;
-  color: #121212; /* Same as the background color */
+  color: transparent; /* The 'i' is hidden when not expanded */
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out,
+    z-index 0s 0.5s;
+  transform-origin: center center; /* Adjust origin for scale */
+  z-index: 1000; /* High z-index to ensure button is clickable */
+}
+
+.info-button.expanded {
+  transform: scale(50); /* Large enough value to cover the whole screen */
+  border-radius: 0;
+  bottom: 50%;
+  left: 50%;
+  width: 1px; /* Neutral width to avoid screen split on scaling */
+  height: 1px; /* Neutral height to avoid screen split on scaling */
+  margin: 0; /* Neutral margin to ensure correct positioning */
+  color: transparent; /* Hide the 'i' when expanded */
+  z-index: -1; /* Lower z-index after expansion */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 999; /* High z-index to cover the entire screen but below the info-button */
+  opacity: 0;
+  pointer-events: none; /* Initially disable interactions */
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto; /* Re-enable interactions */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  color: black;
+  position: relative; /* To stack on top of the overlay */
+  z-index: 1001; /* Ensure modal content is above the overlay */
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0; /* Initially hidden */
+}
+
+.modal-overlay.active .modal-content {
+  opacity: 1; /* Make content visible when overlay is active */
 }
