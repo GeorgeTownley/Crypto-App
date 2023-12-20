@@ -6,7 +6,6 @@ const CryptoTable = () => {
 
   useEffect(() => {
     // Define the top 20 cryptocurrencies by their symbols
-    // Update this list to your preference of top 20 cryptocurrencies
     const topCryptos = [
       "BTC",
       "ETH",
@@ -30,23 +29,43 @@ const CryptoTable = () => {
       "XTZ",
     ];
 
-    // Fetch data from Coinlayer
-    fetch(`http://api.coinlayer.com/api/live?access_key=${API_KEY}`)
-      .then((response) => response.json())
-      .then((data) => {
-        // Filter out the top 20 tokens from the data
-        const filteredData = topCryptos.map((crypto) => {
-          // Use toFixed to format the rate to two decimal places
-          // Parse the rate to a float in case it's returned as a string
-          const rate = parseFloat(data.rates[crypto]);
-          return {
-            name: crypto,
-            rate: rate ? rate.toFixed(2) : "Not available",
-          };
-        });
+    // Function to fetch historical data
+    const fetchHistoricalData = (date) => {
+      return fetch(
+        `http://api.coinlayer.com/${date}?access_key=${API_KEY}`
+      ).then((response) => response.json());
+    };
 
-        // Update state with the filtered data
-        setCryptoData(filteredData);
+    // Function to calculate 24h change
+    const calculateChange = (currentRates, historicalRates) => {
+      return topCryptos.map((crypto) => {
+        const currentRate = parseFloat(currentRates[crypto]);
+        const historicalRate = parseFloat(historicalRates[crypto]);
+        const change = ((currentRate - historicalRate) / historicalRate) * 100;
+        return {
+          name: crypto,
+          rate: currentRate ? currentRate.toFixed(2) : "Not available",
+          change: !isNaN(change) ? change.toFixed(2) : "Not available",
+        };
+      });
+    };
+
+    // Fetch current rates
+    fetch(`http://api.coinlayer.com/live?access_key=${API_KEY}`)
+      .then((response) => response.json())
+      .then((currentData) => {
+        // Fetch historical rates from yesterday
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const date = yesterday.toISOString().split("T")[0];
+        return fetchHistoricalData(date).then((historicalData) => {
+          // Calculate 24h change and update state
+          const newData = calculateChange(
+            currentData.rates,
+            historicalData.rates
+          );
+          setCryptoData(newData);
+        });
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
@@ -60,7 +79,7 @@ const CryptoTable = () => {
           <tr>
             <th>Name</th>
             <th>Rate</th>
-            {/* Add additional headers for other data points here */}
+            <th>24h Change</th> {/* New header */}
           </tr>
         </thead>
         <tbody>
@@ -68,7 +87,10 @@ const CryptoTable = () => {
             <tr key={index}>
               <td>{token.name}</td>
               <td>{token.rate}</td>
-              {/* Add additional data points here */}
+              <td style={{ color: token.change >= 0 ? "green" : "red" }}>
+                {token.change}%
+              </td>{" "}
+              {/* Display 24h change */}
             </tr>
           ))}
         </tbody>
