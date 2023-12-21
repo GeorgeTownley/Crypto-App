@@ -70,7 +70,8 @@ const CryptoTable = () => {
       .catch((error) => {
         console.error("Error fetching data: ", error);
       });
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Intentionally leaving out API_KEY because it does not change
 
   return (
     <div className="crypto-table-container">
