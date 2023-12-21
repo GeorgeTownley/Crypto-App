@@ -32,7 +32,7 @@ const CryptoTable = () => {
     // Function to fetch historical data
     const fetchHistoricalData = (date) => {
       return fetch(
-        `http://api.coinlayer.com/${date}?access_key=${API_KEY}`
+        `https://api.coinlayer.com/${date}?access_key=${API_KEY}`
       ).then((response) => response.json());
     };
 
@@ -51,7 +51,7 @@ const CryptoTable = () => {
     };
 
     // Fetch current rates
-    fetch(`http://api.coinlayer.com/live?access_key=${API_KEY}`)
+    fetch(`https://api.coinlayer.com/live?access_key=${API_KEY}`)
       .then((response) => response.json())
       .then((currentData) => {
         // Fetch historical rates from yesterday
