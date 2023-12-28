@@ -6,38 +6,35 @@ html {
   padding: 0;
   overflow: hidden; /* Prevents scrolling */
   height: 100vh; /* Locks the height to the viewport */
+  background-color: #121212; /* Set background color */
 }
 
 .App {
   text-align: center;
-  background-color: #121212; /* Dark background for the entire app */
   color: white; /* White text color */
+  padding-top: 50px; /* Add some space at the top */
   height: 100vh; /* Full height */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center content vertically */
+  justify-content: flex-start; /* Align content to start */
 }
 
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  height: 60px;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  background: #121212; /* Dark background for navbar */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 3;
+.App-header {
+  margin-bottom: 2rem; /* Space between the header and table */
 }
 
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 2px;
+.App-logo {
+  height: 80px; /* Set a height for your logo */
+  margin-bottom: 1rem; /* Space between the logo and title */
 }
+
+.App-title {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+/* crypto table styles */
 
 .crypto-table-container {
   margin-top: 80px; /* Adjusted to account for navbar */

@@ -1,14 +1,14 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
 import CryptoTable from "./components/CryptoTable";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <div className="crypto-table-container">
-        <CryptoTable />
-      </div>
+      <header className="App-header">
+        <img src={"./wizard.png"} alt="Logo" className="App-logo" />
+        <h1 className="App-title">Crypto Wizard</h1>
+      </header>
+      <CryptoTable />
     </div>
   );
 }

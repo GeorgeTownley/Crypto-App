@@ -79,7 +79,7 @@ const CryptoTable = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Rate</th>
+            <th>Rate (USD)</th>
             <th>24h Change</th> {/* New header */}
           </tr>
         </thead>
